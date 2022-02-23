@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,13 +24,10 @@ Route::middleware('auth')->group(function (){
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('/friends', function () {
-       return 'friends';
-    })->name('friends');
 
-    Route::get('/groups', function () {
-        return 'groups';
-    })->name('groups');
+    Route::resource('friends', Controllers\FriendsController ::class);
+    Route::resource('groups', Controllers\GroupsController ::class);
+    Route::post('groups/{id}/add-friends', [Controllers\GroupsController ::class, 'addFriends'])->name('groups.add-friends');
 
 });
 
